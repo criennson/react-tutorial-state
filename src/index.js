@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 
 import "./styles.css";
@@ -8,6 +8,10 @@ function Room()  {
   const [isLit, setLit] = useState(true);
   const brightness = isLit ? "lit" : "dark";
   const [temperature, setTemperature] = useState(22);
+
+  useEffect(() => {
+    document.title = `${temperature} ℃`;
+  });
   
   return (
     <div className={`room ${isLit ? "lit" : "dark"}`}>
@@ -24,14 +28,14 @@ function Room()  {
       <button onClick = {() => setLit(false)}>
         OFF
       </button>
-      <button onClick = {() => setTemperature(temperature => temperature + 1)}>
-        +
-      </button>
-      <button onClick = {() => setTemperature(temperature => temperature - 1)}>
+      <button onClick = {() => setTemperature(temperature - 1)}>
         -
       </button>
+      <button onClick = {() => setTemperature(temperature + 1)}>
+        +
+      </button>
     </div>
-  )
+  );
 }
 
 ReactDOM.render(<Room />, document.querySelector('#root'));
